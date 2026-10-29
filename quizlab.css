@@ -1,0 +1,848 @@
+/* =========================================
+   1. VARIABLES DU MODE CLAIR
+========================================= */
+
+:root {
+  color-scheme: light;
+
+  --bg: #f6f5fb;
+  --surface: #ffffff;
+  --surface-2: #eeebf8;
+  --hover: #e5def6;
+  --border: #e2deef;
+
+  --text: #25213a;
+  --text-2: #69647d;
+  --text-3: #8d879f;
+
+  --accent: #7256c9;
+  --accent-hover: #6044b8;
+  --accent-contrast: #ffffff;
+
+  --success: #23845b;
+  --error: #d94d5c;
+
+  --success-bg: #e8f7ef;
+  --error-bg: #fff0f1;
+
+  --shadow: 0 16px 45px rgba(49, 35, 91, 0.07);
+}
+
+
+/* =========================================
+   2. VARIABLES DU MODE SOMBRE
+========================================= */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #11111b;
+  --surface: #1b1b2a;
+  --surface-2: #27263b;
+  --hover: #34314d;
+  --border: #37344f;
+
+  --text: #f4f1ff;
+  --text-2: #c0bad6;
+  --text-3: #928ba9;
+
+  --accent: #b6a0ff;
+  --accent-hover: #c8baff;
+  --accent-contrast: #171326;
+
+  --success: #83ddb0;
+  --error: #ff929b;
+
+  --success-bg: #203b32;
+  --error-bg: #40252d;
+
+  --shadow: 0 16px 45px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   3. RÉINITIALISATION
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      ellipse at 75% 10%,
+      var(--surface-2) 0%,
+      transparent 38%
+    ),
+    var(--bg);
+
+  color: var(--text);
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+button,
+a,
+input,
+select {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================
+   4. BARRE DE NAVIGATION
+========================================= */
+
+.navbar {
+  min-height: 72px;
+  padding: 12px 7%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: var(--surface);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.logo {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.logo span,
+h1 span,
+#builder-title span {
+  color: var(--accent);
+}
+
+
+/* Navigation entre les modes */
+
+.nav-modes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-tab {
+  padding: 8px 14px;
+
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  color: var(--text-2);
+
+  font-size: 0.8rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-tab:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.btn-tab.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+
+/* Bouton du changement de thème */
+
+.theme-toggle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-2);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+#theme-icon {
+  font-size: 1rem;
+}
+
+
+/* Petit slogan */
+
+.tagline {
+  color: var(--text-3);
+
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   5. CONTENU PRINCIPAL
+========================================= */
+
+.container {
+  width: min(850px, calc(100% - 40px));
+  min-height: calc(100vh - 72px);
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Introduction */
+
+.intro {
+  padding: 100px 0 70px;
+  max-width: 680px;
+}
+
+.eyebrow {
+  color: var(--accent);
+
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1 {
+  margin: 20px 0;
+
+  font-size: clamp(2.5rem, 7vw, 4.8rem);
+  line-height: 1.08;
+  letter-spacing: -3px;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.3;
+}
+
+.description {
+  max-width: 540px;
+
+  color: var(--text-2);
+
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+
+/* Informations sur le quiz */
+
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+
+  margin: 28px 0;
+
+  color: var(--text-3);
+  font-size: 0.85rem;
+}
+
+.details strong {
+  color: var(--text);
+}
+
+
+/* =========================================
+   6. BOUTONS PRINCIPAUX
+========================================= */
+
+.btn {
+  padding: 14px 19px;
+
+  border: 0;
+  border-radius: 11px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   7. CARTES PRINCIPALES
+========================================= */
+
+.quiz-card,
+.result-card,
+.builder-card {
+  width: 100%;
+
+  margin: 60px 0;
+  padding: clamp(22px, 5vw, 40px);
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* En-tête du quiz */
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.score-badge {
+  padding: 8px 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 30px;
+
+  color: var(--text-2);
+  font-size: 0.85rem;
+}
+
+.score-badge strong {
+  color: var(--accent);
+}
+
+
+/* Barre de progression */
+
+.progress-track {
+  height: 5px;
+  margin: 20px 0 30px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+
+  background: var(--accent);
+
+  transition: width 0.3s ease;
+}
+
+
+/* =========================================
+   8. RÉPONSES DU QUIZ
+========================================= */
+
+.answers {
+  display: grid;
+  gap: 12px;
+}
+
+.answer-btn {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  width: 100%;
+  padding: 14px;
+
+  text-align: left;
+
+  border: 1px solid var(--border);
+  border-radius: 11px;
+
+  background: var(--bg);
+  color: var(--text);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.answer-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+
+
+/* Lettre de chaque réponse */
+
+.answer-letter {
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 30px;
+  height: 30px;
+
+  border-radius: 8px;
+
+  background: var(--surface-2);
+  color: var(--text-2);
+
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+
+/* Bonne réponse */
+
+.answer-btn.correct {
+  border-color: var(--success);
+  background: var(--success-bg);
+}
+
+.answer-btn.correct .answer-letter {
+  background: var(--success);
+  color: var(--accent-contrast);
+}
+
+
+/* Mauvaise réponse */
+
+.answer-btn.incorrect {
+  border-color: var(--error);
+  background: var(--error-bg);
+}
+
+.answer-btn.incorrect .answer-letter {
+  background: var(--error);
+  color: #ffffff;
+}
+
+
+/* Explication de la réponse */
+
+.feedback {
+  min-height: 25px;
+  margin: 18px 0;
+
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.feedback.good {
+  color: var(--success);
+}
+
+.feedback.bad {
+  color: var(--error);
+}
+
+
+/* Pied de la carte du quiz */
+
+.quiz-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid var(--border);
+}
+
+.muted {
+  color: var(--text-3);
+  font-size: 0.82rem;
+}
+
+
+/* =========================================
+   9. RÉSULTAT FINAL
+========================================= */
+
+.result-card {
+  text-align: center;
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.result-icon {
+  display: grid;
+  place-items: center;
+
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 22px;
+
+  border-radius: 50%;
+
+  background: var(--success-bg);
+  color: var(--success);
+
+  font-size: 1.7rem;
+}
+
+.result-score {
+  margin: 20px 0;
+
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -3px;
+}
+
+.result-total {
+  color: var(--text-3);
+  font-size: 2rem;
+}
+
+
+/* =========================================
+   10. FORMULAIRE DE CRÉATION
+========================================= */
+
+.question-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  margin-top: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  color: var(--text-2);
+
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: var(--bg);
+  color: var(--text);
+
+  font: inherit;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--text-3);
+  opacity: 1;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+
+/* Deux colonnes pour les options */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+
+/* Séparateur */
+
+.divider {
+  margin: 35px 0;
+
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+
+/* En-tête de la liste des questions */
+
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+
+/* Bouton texte */
+
+.btn-text {
+  background: transparent;
+  border: none;
+
+  color: var(--accent);
+
+  cursor: pointer;
+
+  font-size: 0.78rem;
+  text-decoration: underline;
+}
+
+.btn-text:hover {
+  color: var(--accent-hover);
+}
+
+
+/* Liste des questions personnalisées */
+
+.custom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  margin-top: 15px;
+
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.custom-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: var(--bg);
+}
+
+
+/* Bouton de suppression */
+
+.btn-delete {
+  flex-shrink: 0;
+
+  background: transparent;
+  border: none;
+
+  color: var(--error);
+
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.btn-delete:hover {
+  transform: scale(1.1);
+}
+
+
+/* =========================================
+   11. PIED DE PAGE
+========================================= */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-top: auto;
+  padding: 22px 0;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--text-3);
+  font-size: 0.72rem;
+}
+
+
+/* Masquer les sections inactives */
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================
+   12. RESPONSIVE : TABLETTES
+========================================= */
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 14px 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tagline {
+    text-align: center;
+  }
+}
+
+
+/* =========================================
+   13. RESPONSIVE : TÉLÉPHONES
+========================================= */
+
+@media (max-width: 650px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-modes {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .theme-toggle {
+    align-self: center;
+  }
+
+  .intro {
+    padding-top: 65px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-card,
+  .result-card,
+  .builder-card {
+    margin: 30px 0;
+    padding: 22px 17px;
+  }
+
+  .quiz-footer,
+  .footer,
+  .custom-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quiz-footer .btn {
+    width: 100%;
+  }
+
+  .result-score {
+    font-size: 3.5rem;
+  }
+}
+
+
+/* =========================================
+   14. ACCESSIBILITÉ : ANIMATIONS RÉDUITES
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

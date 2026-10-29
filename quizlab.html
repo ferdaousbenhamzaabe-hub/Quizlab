@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QuizLab — Joue et crée tes propres quiz personnalisés.">
+  <title>QuizLab — Teste et crée tes connaissances</title>
+  <link rel="stylesheet" href="quizlab.css">
+  <script src="quizlab.js" defer></script>
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="#" class="logo">&lt;/&gt; QuizLab<span>.</span></a>
+
+    <div class="nav-modes">
+      <button id="mode-play-btn" class="btn-tab active" type="button">
+        🎮 Jouer
+      </button>
+
+      <button id="mode-edit-btn" class="btn-tab" type="button">
+        ✏️ Mes Questions
+      </button>
+    </div>
+
+    <button
+      id="theme-toggle"
+      class="theme-toggle"
+      type="button"
+      aria-label="Activer le mode sombre"
+      aria-pressed="false"
+    >
+      <span id="theme-icon" aria-hidden="true">🌙</span>
+      <span id="theme-label">Mode sombre</span>
+    </button>
+
+    <span class="tagline">APPRENDRE EN JOUANT</span>
+  </header>
+
+  <main class="container">
+
+    <!-- SECTION 1 : INTRODUCTION -->
+    <section id="intro" class="intro">
+      <p class="eyebrow">● MINI CHALLENGE</p>
+
+      <h1>Teste tes connaissances<span>.</span></h1>
+
+      <p class="description">
+        Quelques questions, un peu de réflexion et découvre ton score.
+        Prête à commencer ?
+      </p>
+
+      <div class="details">
+        <span><strong id="total-questions-count">8</strong> questions</span>
+        <span>Choix multiples</span>
+        <span>Sauvegarde automatique</span>
+      </div>
+
+      <button id="start-btn" class="btn btn-primary" type="button">
+        Commencer le quiz <span aria-hidden="true">↗</span>
+      </button>
+    </section>
+
+    <!-- SECTION 2 : CARTE DU QUIZ -->
+    <section
+      id="quiz"
+      class="quiz-card hidden"
+      aria-labelledby="question-title"
+    >
+      <div class="quiz-header">
+        <p id="question-counter" class="eyebrow">QUESTION 01 / 08</p>
+
+        <p class="score-badge">
+          Score : <strong id="live-score">0</strong>
+        </p>
+      </div>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Progression du quiz"
+        aria-valuemin="0"
+        aria-valuemax="8"
+        aria-valuenow="0"
+        id="progress-track"
+      >
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+
+      <h2 id="question-title">Question</h2>
+
+      <div id="answers" class="answers"></div>
+
+      <p id="feedback" class="feedback" aria-live="polite"></p>
+
+      <div class="quiz-footer">
+        <span id="answered-count" class="muted">
+          0 réponse sur 8
+        </span>
+
+        <button
+          id="next-btn"
+          class="btn btn-primary"
+          type="button"
+          disabled
+        >
+          Question suivante →
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION 3 : RÉSULTAT FINAL -->
+    <section
+      id="result"
+      class="result-card hidden"
+      aria-labelledby="result-title"
+      aria-live="polite"
+    >
+      <div class="result-icon" aria-hidden="true">✓</div>
+
+      <p class="eyebrow">QUIZ TERMINÉ</p>
+
+      <h2 id="result-title">Bien joué !</h2>
+
+      <p class="result-score">
+        <span id="final-score">0</span>
+        <span class="result-total">/ 8</span>
+      </p>
+
+      <p id="result-message" class="description">
+        Voici ton résultat.
+      </p>
+
+      <button id="restart-btn" class="btn btn-primary" type="button">
+        Recommencer ↻
+      </button>
+    </section>
+
+    <!-- SECTION 4 : ÉDITEUR DE QUESTIONS -->
+    <section
+      id="builder"
+      class="builder-card hidden"
+      aria-labelledby="builder-title"
+    >
+      <div class="section-heading">
+        <p class="eyebrow">● ÉDITEUR DE QUESTIONS</p>
+
+        <h2 id="builder-title">
+          Ajouter une question personnalisée<span>.</span>
+        </h2>
+
+        <p class="description">
+          Créez vos propres questions. Elles seront sauvegardées
+          localement dans votre navigateur.
+        </p>
+      </div>
+
+      <form id="question-form" class="question-form">
+        <div class="form-group">
+          <label for="input-question">Intitulé de la question</label>
+
+          <input
+            type="text"
+            id="input-question"
+            placeholder="Ex: Que signifie CSS ?"
+            required
+          >
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="opt-0">Option A</label>
+
+            <input
+              type="text"
+              id="opt-0"
+              placeholder="Cascading Style Sheets"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="opt-1">Option B</label>
+
+            <input
+              type="text"
+              id="opt-1"
+              placeholder="Creative Style System"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="opt-2">Option C</label>
+
+            <input
+              type="text"
+              id="opt-2"
+              placeholder="Computer Style Sheet"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="opt-3">Option D</label>
+
+            <input
+              type="text"
+              id="opt-3"
+              placeholder="Color Style Sheet"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="select-correct">Bonne réponse</label>
+
+          <select id="select-correct" required>
+            <option value="0">Option A</option>
+            <option value="1">Option B</option>
+            <option value="2">Option C</option>
+            <option value="3">Option D</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="input-explanation">
+            Explication (optionnelle)
+          </label>
+
+          <input
+            type="text"
+            id="input-explanation"
+            placeholder="Ex: CSS définit le style et la mise en page."
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          ➕ Enregistrer la question
+        </button>
+      </form>
+
+      <hr class="divider">
+
+      <div class="custom-header">
+        <h3>
+          Questions en banque (<span id="custom-count">0</span>)
+        </h3>
+
+        <button id="reset-default-btn" class="btn-text" type="button">
+          Réinitialiser aux questions par défaut
+        </button>
+      </div>
+
+      <div id="custom-questions-list" class="custom-list"></div>
+    </section>
+
+    <!-- PIED DE PAGE -->
+    <footer class="footer">
+      <span>QUIZLAB · HTML / CSS / JS</span>
+      <span>Conçu pour apprendre en pratiquant.</span>
+    </footer>
+
+  </main>
+</body>
+</html>
